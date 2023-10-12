@@ -20,14 +20,23 @@ export default function Home() {
         <link rel="icon" href="/images/favicon-32x32.png" />
       </Head>
       <main>
-        <header className="h-96 w-full bg-gradient-to-b from-[hsl(13,_100%,_72%)] to-[hsl(353,_100%,_62%)] px-4 py-10 ">
-          <nav className="relative flex items-center justify-between">
+        <header
+          className="relative h-[600px] w-full rounded-bl-[7rem] bg-no-repeat px-4 py-10 Fm:px-40"
+          style={{
+            backgroundImage:
+              "url(/images/bg-pattern-intro-desktop.svg), linear-gradient(to right, hsl(13, 100%, 72%), hsl(353, 100%, 62%))",
+            backgroundPosition: "20% 53%, center center",
+            backgroundSize: "200%",
+          }}
+        >
+          <nav className="relative flex items-center justify-between Fm:gap-14">
             <Image
               src={"/images/logo.svg"}
               alt="logo"
               width="101"
               height="40"
             />
+            {/* Mobile Menu */}
             <Image
               src={
                 isOpen ? "/images/icon-close.svg" : "/images/icon-hamburger.svg"
@@ -36,6 +45,7 @@ export default function Home() {
               height={isOpen ? "26" : "18"}
               alt="menu"
               onClick={() => setIsOpen(!isOpen)}
+              className="Fm:hidden"
             />
             {isOpen && (
               <div className="absolute top-20 flex w-full flex-col items-stretch gap-4 border-2 bg-white p-5 text-center">
@@ -90,13 +100,199 @@ export default function Home() {
                 })}
                 <div className="my-2 w-full border"></div>
                 <p className="font-ubuntu">Login</p>
-                <button className="font-ubuntu self-center rounded-full bg-gradient-to-r from-[hsl(13,_100%,_72%)] to-[hsl(353,_100%,_62%)] px-10 py-3 font-bold text-white">
+                <button className="self-center rounded-full bg-gradient-to-r from-[hsl(13,_100%,_72%)] to-[hsl(353,_100%,_62%)] px-10 py-3 font-ubuntu font-bold text-white hover:bg-[#ff7b86]">
                   Sign Up
                 </button>
               </div>
             )}
+            {/* Desktop Menu */}
+            <div className="invisible absolute grow items-center gap-8 text-white Fm:visible Fm:relative Fm:flex">
+              {Object.keys(menuItems).map((item) => {
+                return (
+                  <div
+                    key={item}
+                    className="relative flex flex-col items-center gap-3"
+                  >
+                    <div
+                      className="flex flex-row items-center gap-2"
+                      onClick={() =>
+                        setIsMobileOpen({
+                          ...isMobileOpen,
+                          [item]: !isMobileOpen[item],
+                        })
+                      }
+                    >
+                      <p
+                        className={`${
+                          !isMobileOpen[item]
+                            ? "font-ubuntu font-bold"
+                            : "font-ubuntu font-normal"
+                        } hover:cursor-pointer hover:underline`}
+                      >
+                        {item}
+                      </p>
+                      <Image
+                        src={"/images/icon-arrow-light.svg"}
+                        alt="arrow"
+                        width="10"
+                        height="7"
+                        className={`${isMobileOpen[item] ? "rotate-180" : ""}`}
+                      />
+                    </div>
+                    {isMobileOpen[item] && (
+                      <div className="absolute top-5 mt-4 flex w-auto flex-col gap-2 rounded-2xl bg-[#efeff1] p-5 py-8">
+                        {menuItems[item]!.map((subItem: string) => (
+                          <p
+                            key={subItem}
+                            className="font-ubuntu text-gray-700 hover:cursor-pointer hover:font-bold"
+                          >
+                            {subItem}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+              <p className="font-ubuntu Fm:ml-auto">Login</p>
+              <button className="self-center rounded-full bg-gradient-to-r from-[hsl(13,_100%,_72%)] to-[hsl(353,_100%,_62%)] px-10 py-3 font-ubuntu font-bold text-white hover:bg-[#ff7b86] hover:bg-none">
+                Sign Up
+              </button>
+            </div>
           </nav>
+          <div className="px-7 py-24">
+            <h1 className="w-full text-center font-ubuntu  text-3xl font-bold text-white Fm:text-6xl Fm:font-normal">
+              A modern publishing platform
+            </h1>
+            <p className="mt-6 text-center font-ubuntu text-lg text-white Fm:text-xl">
+              Grow your audience and buil your online brand
+            </p>
+            <div className="mt-12 flex items-center justify-between gap-2 Fm:justify-center Fm:gap-4">
+              <button className="rounded-full bg-white px-3 py-3 font-ubuntu  text-lg font-bold text-[#ff6865] hover:bg-[#ff7b86] hover:text-white">
+                Start for Free
+              </button>
+              <button className="rounded-full border border-white bg-transparent px-3 py-3 font-ubuntu text-lg font-bold text-white hover:bg-white hover:text-[#ff6865]">
+                Learn More
+              </button>
+            </div>
+          </div>
         </header>
+        <article className="mt-24 overflow-hidden text-center font-ubuntu">
+          <h2 className="mx-5 text-2xl font-bold">Designed for the future</h2>
+          <div className="Fm:flex Fm:items-center">
+            <Image
+              src={"/images/illustration-editor-mobile.svg"}
+              alt="editor"
+              width="406"
+              height="331"
+              className="mt-12 Fm:order-2 Fm:w-1/2 Fm:translate-x-20 Fm:transform"
+            />
+            <div className="Fm:w-1/2 Fm:text-left ">
+              <h3 className="mx-20 mt-12 text-xl font-bold Fm:mx-36">
+                Introducing an extensible editor
+              </h3>
+              <p className="mx-8 mt-4 text-gray-500 Fm:mx-36">
+                Blogr features an exceedingly intuitive interface which lets you
+                focus on one thing: creating content. The editor supports
+                management of multiple blogs and allows easy manipulation of
+                embeds such as images, videos, and Markdown. Extensibility with
+                plugins and themes provide easy ways to add functionality or
+                change the looks of a blog.
+              </p>
+              <h3 className="mx-20 mt-12 text-xl font-bold Fm:mx-36">
+                Robust content management
+              </h3>
+              <p className="mx-8 mt-4 text-gray-500 Fm:mx-36">
+                Flexible content management enables users to easily move through
+                posts. Increase the usability of your blog by adding customized
+                categories, sections, format, or flow. With this functionality,
+                you&apos;re in full control.
+              </p>
+            </div>
+          </div>
+        </article>
+        <article
+          className="relative mt-56 h-[545px] w-full rounded-bl-[7rem] rounded-tr-[7rem] bg-[#3a3b59] bg-[url(/images/bg-pattern-circles.svg)] bg-auto bg-no-repeat Fm:flex Fm:h-[400px]"
+          style={{
+            backgroundPosition: "center -190px",
+            backgroundSize: "140%",
+          }}
+        >
+          <div className="relative Fm:w-1/2">
+            <Image
+              src={"/images/illustration-phones.svg"}
+              alt="phones"
+              width="552"
+              height="579"
+              className="relative left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 transform Fm:top-1/2"
+            />
+          </div>
+          <div className="Fm:w-1/2">
+            <h2 className="-mt-52 text-center text-3xl font-bold text-white Fm:mt-24 Fm:pt-11 Fm:text-left">
+              State of the Art Infrastructure
+            </h2>
+            <p className="mx-8 mt-4 text-center text-white Fm:ml-0 Fm:w-[520px] Fm:text-left">
+              With reliability and speed in mind, worldwide data centers provide
+              the backbone for ultra-fast connectivity. This ensures your site
+              will load instantly, no matter where your readers are, keeping
+              your site competitive.
+            </p>
+          </div>
+        </article>
+        <article className="Fm:flex Fm:items-center">
+          <Image
+            src={"/images/illustration-laptop-mobile.svg"}
+            alt="laptop"
+            width="498"
+            height="359"
+            className="Fm:tranform mt-24 Fm:w-1/2 Fm:-translate-x-52"
+          />
+          <div className="Fm:w-1/2">
+            <h2 className="mx-20 mt-12 text-center text-xl font-bold Fm:text-left">
+              Free, open, simple
+            </h2>
+            <p className="mx-8 mt-4 text-center text-gray-500 Fm:mx-20 Fm:text-left">
+              Blogr is a free and open source application backed by a large
+              community of helpful developers. It supports features such as code
+              syntax highlighting, RSS feeds, social media integration,
+              third-party commenting tools, and works seamlessly with Google
+              Analytics. The architecture is clean and is relatively easy to
+              learn.
+            </p>
+            <h2 className="mx-20 mt-12 text-center text-xl font-bold Fm:mx-20 Fm:text-left">
+              Powerful tooling
+            </h2>
+            <p className="mx-8 mt-4 text-center text-gray-500 Fm:mx-20 Fm:text-left">
+              Batteries included. We built a simple and straightforward CLI tool
+              that makes customization and deployment a breeze, but capable of
+              producing even the most complicated sites.
+            </p>
+          </div>
+        </article>
+        <footer className="mt-20 flex flex-col items-center justify-center rounded-tr-[7rem] bg-[#24242c] pb-20 pt-16 text-center text-white Fm:flex-row Fm:items-start Fm:justify-around Fm:pl-[175px] Fm:pr-[335px] ">
+          <Image src={"/images/logo.svg"} alt="logo" width="101" height="40" />
+          <div className="Fm:text-left">
+            <p className="mb-7 mt-12 font-bold Fm:mt-0">Product</p>
+            <p>Overview</p>
+            <p>Pricing</p>
+            <p>Marketplace</p>
+            <p>Features</p>
+            <p>Integrations</p>
+          </div>
+          <div className="Fm:text-left">
+            <p className="mb-7 mt-12 font-bold Fm:mt-0">Company</p>
+            <p>About</p>
+            <p>Team</p>
+            <p>Blog</p>
+            <p>Careers</p>
+          </div>
+          <div className="Fm:text-left">
+            <p className="mb-7 mt-12 font-bold Fm:mt-0">Connect</p>
+            <p>Contact</p>
+            <p>Newsletter</p>
+            <p>LinkedIn</p>
+          </div>
+        </footer>
       </main>
     </>
   );
