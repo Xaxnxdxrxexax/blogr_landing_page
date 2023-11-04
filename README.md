@@ -11,8 +11,8 @@ The user can:
 
 ![mobile](./public/screenshots/blogr-landing-page-challenge-snowy.vercel.app_.png)
 
-![mobile menu](<./public/screenshots/blogr-landing-page-challenge-snowy.vercel.app_%20(1).png>)
+![mobile menu](<./public/screenshots/blogr-landing-page-challenge-snowy.vercel.app_(1).png>)
 
 ## 1440px
 
-![desktop](<./public/screenshots/blogr-landing-page-challenge-snowy.vercel.app_%20(2).png>)
+![desktop](<./public/screenshots/blogr-landing-page-challenge-snowy.vercel.app_(2).png>)
